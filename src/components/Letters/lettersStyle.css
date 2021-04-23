@@ -1,0 +1,14 @@
+.alphabet-wrapper {
+  grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row-start: 4;
+  display: grid;
+  grid-template-columns: 16% 16% 16% 16% 16% 16%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+}
+
+.letter {
+  font-size: 25px;
+  width: 100%;
+  color: #494949;
+}

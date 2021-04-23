@@ -1,0 +1,27 @@
+.score-wrapper {
+  margin-top: 40px;
+  cursor: default;
+  grid-column-start: 4;
+}
+
+.score {
+  padding: 0 14px;
+  width: 30px;
+}
+
+.score-element {
+  padding: 0 14px 0!important;
+  width: 30px;
+}
+
+.score-element > div > span {
+  font-weight: 700 !important;
+}
+
+#hit {
+  color: #297c3f;
+}
+
+#miss {
+  color: #c41d1d;
+}

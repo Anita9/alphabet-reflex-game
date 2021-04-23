@@ -1,0 +1,11 @@
+.game-difficulties {
+  justify-content: center;
+  grid-column-start: 2;
+  grid-row-start: 1;
+}
+
+.game-diff-element {
+  height: 20%;
+  margin-top: 40px;
+}
+
