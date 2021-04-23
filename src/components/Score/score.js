@@ -14,13 +14,13 @@ class Score extends Component {
         <Typography  variant="h6" className="score"> Score </Typography>
         <List>
           <ListItem className="score-element" id="hit">
-            <ListItemText primary="HIT: "/>
+            <ListItemText primary={"HIT: ".concat(this.props.hitCount)}/>
           </ListItem>
           <ListItem className="score-element" id="miss">
-            <ListItemText primary="Miss: "/>
+            <ListItemText primary={"MISS: ".concat(this.props.missCount)}/>
           </ListItem>
           <ListItem className="score-element" id="left">
-            <ListItemText primary="Left: "/>
+            <ListItemText primary={"Left: ".concat(this.props.leftCount)}/>
           </ListItem>
         </List>
         </div>

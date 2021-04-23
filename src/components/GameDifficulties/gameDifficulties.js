@@ -10,17 +10,17 @@ class GameDifficulties extends Component {
     return (
       <RadioGroup row className="game-difficulties">
         <FormControlLabel
-          control={<Radio color="primary" checked={this.props.isEasyGame} onClick={() => this.props.onClick('easy')}/>}
+          control={<Radio color="primary" checked={this.props.isEasyGame} disabled={this.props.isGameInProgress} onClick={() => this.props.onClick('easy')}/>}
           label="Easy"
           className="game-diff-element"
         />
         <FormControlLabel
-          control={<Radio color="primary" checked={this.props.isMediumGame} onClick={() => this.props.onClick('medium')}/>}
+          control={<Radio color="primary" checked={this.props.isMediumGame} disabled={this.props.isGameInProgress} onClick={() => this.props.onClick('medium')}/>}
           label="Medium"
           className="game-diff-element"
         />
         <FormControlLabel
-          control={<Radio color="primary" checked={this.props.isHardGame} onClick={() => this.props.onClick('hard')}/>}
+          control={<Radio color="primary" checked={this.props.isHardGame} disabled={this.props.isGameInProgress} onClick={() => this.props.onClick('hard')}/>}
           label="Hard"
           className="game-diff-element"
         />

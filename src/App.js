@@ -20,12 +20,36 @@ class App extends Component {
       isHardGame: false,
       number: null,
       timerId: null,
-      isGameInProgress: false
+      isGameInProgress: false,
+      hitCount: 0,
+      missCount: 0,
+      leftCount: 26,
+      alphabet: this.generateAlphabet('A', 'Z'),
+      numbersPassed: [],
+      inputValue: ''
     }
   }
 
   getRandomNumber = (min, max) => {
-    return Math.floor(Math.random() * (max - min) + min);
+    let numbersArray = this.state.numbersPassed;
+    let number =  Math.floor(Math.random() * (max - min) + min);
+    if(!this.state.numbersPassed.includes(number)) {
+      numbersArray.push(number);
+      this.setState({
+        numbersPassed: numbersArray
+      });
+      return number;
+    } else {
+      if(this.state.numbersPassed.length < max - 1) {
+        return this.getRandomNumber(min, max);
+      } else {
+        this.setState({
+          inputValue: ''
+        })
+        return;
+
+      }
+    }
   }
 
   onRadioButtonClick = difficulty => {
@@ -63,7 +87,8 @@ class App extends Component {
   startGame = () => {
     this.setState({
       isGameInProgress: true,
-      number: this.getRandomNumber(1, 27)
+      number: this.getRandomNumber(1, 27),
+      timerId: null
     });
 
     if(this.state.isEasyGame) this.setTimer(5000);
@@ -75,20 +100,84 @@ class App extends Component {
 
   stopGame = () => {
     this.setState({
-      isGameInProgress: false
+      isEasyGame: false,
+      isMediumGame: false,
+      isHardGame: false,
+      number: null,
+      isGameInProgress: false,
+      hitCount: 0,
+      missCount: 0,
+      leftCount: 26,
+      numbersPassed: [],
+      inputValue: ''
     });
 
     clearInterval(this.state.timerId);
   }
+
+  generateAlphabet = (char1, char2) => {
+    let array = [];
+    let i = char1.charCodeAt(0);
+    let j = char2.charCodeAt(0);
+    let count = 1;
+
+    for (; i <= j; ++i) {
+      array.push({letter: String.fromCharCode(i), code: count, color: 'grey'})
+      count++;
+    }
+
+    return array;
+  }
+
+  validateInput = e => {
+    let keyCode = e.keyCode || e.which;
+
+    let regex = /^[a-zA-Z]+$/;
+
+    let isValid = regex.test(String.fromCharCode(keyCode));
+
+    return isValid;
+  }
+
+  checkInput = e => {
+    const {alphabet, number, hitCount, leftCount, missCount} = this.state;
+    let isValid = this.validateInput(e);
+    let selectedLetter = alphabet.find(i => i.code === number);
+    let inputLetter;
+
+    if (!isValid) {
+      return;
+    } else {
+      inputLetter = alphabet.find(i => i.letter === e.key.toUpperCase());
+      this.setState({
+        inputValue: e.key.toUpperCase()
+      })
+      if (inputLetter.code === selectedLetter.code) {
+        alphabet.find(i => i.code === inputLetter.code && i.color === 'green');
+        this.setState({
+          hitCount: hitCount + 1,
+          leftCount: leftCount - 1,
+          alphabet: alphabet.map(i => i.code === inputLetter.code ? {letter: i.letter, code: i.code, color: 'green'} : {letter: i.letter, code: i.code, color: i.color})
+        })
+      } else {
+        alphabet.find(i => i.code === inputLetter.code && i.color === 'red');
+        this.setState({
+          missCount: missCount + 1,
+          leftCount: leftCount - 1,
+          alphabet: alphabet.map(i => i.code === selectedLetter.code ? {letter: i.letter, code: i.code, color: 'red'} : {letter: i.letter, code: i.code, color: i.color})
+        })
+      }
+    }
+  }
   
   render() {
 
-    const {isEasyGame, isMediumGame, isHardGame, isGameInProgress} = this.state;
+    const {isEasyGame, isMediumGame, isHardGame, isGameInProgress, hitCount, missCount, leftCount, alphabet, inputValue} = this.state;
 
     return (
       <div className="App">
-        <GameDifficulties isEasyGame={isEasyGame} isMediumGame={isMediumGame} isHardGame={isHardGame} onClick={this.onRadioButtonClick}/>
-        <Score />
+        <GameDifficulties isEasyGame={isEasyGame} isMediumGame={isMediumGame} isHardGame={isHardGame} onClick={this.onRadioButtonClick} isGameInProgress={isGameInProgress}/>
+        <Score hitCount={hitCount} missCount={missCount} leftCount={leftCount}/>
         {!isGameInProgress && 
           <Button
             variant="outlined"
@@ -103,8 +192,8 @@ class App extends Component {
         <div className="number">
           {this.state.number}
         </div>
-        <TextField variant="outlined" label="Input Letter" color="primary" className="input-letter"/>
-        <Letters/>
+        <TextField autoFocus variant="outlined" label="Input Letter" color="primary" className="input-letter" onKeyPress={this.checkInput} value={inputValue}/>
+        <Letters alphabet={alphabet}/>
       </div>
     );
   }

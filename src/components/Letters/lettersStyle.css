@@ -7,8 +7,20 @@
   grid-template-rows: 20% 20% 20% 20% 20%;
 }
 
-.letter {
+.letter-grey {
   font-size: 25px;
   width: 100%;
   color: #494949;
+}
+
+.letter-green {
+  font-size: 25px;
+  width: 100%;
+  color: #297c3f;
+}
+
+.letter-red {
+  font-size: 25px;
+  width: 100%;
+  color: #c41d1d;
 }
