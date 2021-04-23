@@ -5,34 +5,22 @@ import './gameDiffStyles.css';
 
 class GameDifficulties extends Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isEasyGame: false,
-      isMediumGame: false,
-      isHardGame: false
-    }
-  }
-
   render() {
-
-    const {isEasyGame, isMediumGame, isHardGame } = this.state;
 
     return (
       <RadioGroup row className="game-difficulties">
         <FormControlLabel
-          control={<Radio color="primary" checked={isEasyGame}/>}
+          control={<Radio color="primary" checked={this.props.isEasyGame} onClick={() => this.props.onClick('easy')}/>}
           label="Easy"
           className="game-diff-element"
         />
         <FormControlLabel
-          control={<Radio color="primary" checked={isMediumGame}/>}
+          control={<Radio color="primary" checked={this.props.isMediumGame} onClick={() => this.props.onClick('medium')}/>}
           label="Medium"
           className="game-diff-element"
         />
         <FormControlLabel
-          control={<Radio color="primary" checked={isHardGame}/>}
+          control={<Radio color="primary" checked={this.props.isHardGame} onClick={() => this.props.onClick('hard')}/>}
           label="Hard"
           className="game-diff-element"
         />

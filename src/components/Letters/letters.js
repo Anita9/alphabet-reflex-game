@@ -11,10 +11,7 @@ class Letters extends Component {
     let count = 1;
 
     for (; i <= j; ++i) {
-      console.log('prvi inkr', i);
-      console.log('drugi inkr ', j);
       array.push({letter: String.fromCharCode(i), code: count})
-      console.log(array);
       count++;
     }
 
