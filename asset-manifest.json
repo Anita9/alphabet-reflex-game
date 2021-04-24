@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/alphabet-reflex-game/static/css/main.a6850e91.chunk.css",
-    "main.js": "/alphabet-reflex-game/static/js/main.7db9583f.chunk.js",
-    "main.js.map": "/alphabet-reflex-game/static/js/main.7db9583f.chunk.js.map",
+    "main.js": "/alphabet-reflex-game/static/js/main.9cada435.chunk.js",
+    "main.js.map": "/alphabet-reflex-game/static/js/main.9cada435.chunk.js.map",
     "runtime-main.js": "/alphabet-reflex-game/static/js/runtime-main.7982a38a.js",
     "runtime-main.js.map": "/alphabet-reflex-game/static/js/runtime-main.7982a38a.js.map",
     "static/js/2.805b28ac.chunk.js": "/alphabet-reflex-game/static/js/2.805b28ac.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.7982a38a.js",
     "static/js/2.805b28ac.chunk.js",
     "static/css/main.a6850e91.chunk.css",
-    "static/js/main.7db9583f.chunk.js"
+    "static/js/main.9cada435.chunk.js"
   ]
 }
