@@ -75,13 +75,21 @@ class App extends Component {
   }
 
   setTimer = time => {
-    let timerId = setInterval(() => {this.setState({
-      number: this.getRandomNumber(1, 27)
-    })}, time);
-
+    let timerId = setInterval(() => {
+      if(this.state.inputValue === ''){
+        this.setState({
+          missCount: this.state.missCount + 1,
+          alphabet: this.state.alphabet.map(i => i.code === this.state.number ? {letter: i.letter, code: i.code, color: 'red'} : {letter: i.letter, code: i.code, color: i.color})
+        })
+      }
+      this.setState({
+        number: this.getRandomNumber(1, 27),
+        inputValue: ''
+      })  
+    }, time);
     this.setState({
       timerId
-    })
+    });
   }
 
   startGame = () => {
@@ -109,6 +117,7 @@ class App extends Component {
       missCount: 0,
       leftCount: 26,
       numbersPassed: [],
+      alphabet: this.generateAlphabet('A', 'Z'),
       inputValue: ''
     });
 
